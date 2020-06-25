@@ -6,5 +6,6 @@ module Types
     field :client, resolver: Queries::ClientQueries::Client
     field :clients, resolver: Queries::ClientQueries::Clients
 
+    field :user, resolver: Queries::UserQueries::User
   end
 end
