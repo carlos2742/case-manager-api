@@ -13,3 +13,7 @@ end
 def create_client
   Client.create(valid_client_attributes)
 end
+
+def signIn_user
+  {current_user: User.create(valid_user_attributes)}
+end

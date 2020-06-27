@@ -6,7 +6,10 @@ RSpec.describe Mutations::ClientMutation::CreateClient do
   it "create client" do
     variables = valid_client_attributes
 
-    result = gql_query(query: mutation, variables: variables).
+    # signIn User
+    context = signIn_user
+
+    result = gql_query(query: mutation, variables: variables, context: context).
       to_h.deep_symbolize_keys.dig(:data, :createClient)
 
     client = Client.first
@@ -19,17 +22,30 @@ RSpec.describe Mutations::ClientMutation::CreateClient do
   it "raises error for RecordInvalid" do
     variables = valid_client_attributes
 
+    # signIn User
+    context = signIn_user
+
     client = Client.new
     client.validate # missing fields makes this invalid
-    allow(Client).to receive(:create!).
-        and_raise(ActiveRecord::RecordInvalid.new(client))
+      allow(Client).to receive(:create!).
+          and_raise(ActiveRecord::RecordInvalid.new(client))
 
-    result = gql_query(query: mutation, variables: variables).
+    result = gql_query(query: mutation, variables: variables, context: context).
       to_h.deep_symbolize_keys
 
     expect(result[:errors]).to_not be_blank
     expect(result.dig(:errors, 0, :message)).
       to include(client.errors.full_messages.first)
+  end
+
+  it "raises error for RecordInvalid" do
+    variables = valid_client_attributes
+
+    result = gql_query(query: mutation, variables: variables).
+        to_h.deep_symbolize_keys
+
+    expect(result[:errors]).to_not be_blank
+    expect(result.dig(:errors, 0, :message)).to eq('User not signed in')
   end
 
   def mutation
@@ -43,7 +59,7 @@ RSpec.describe Mutations::ClientMutation::CreateClient do
         $phone_number: String!
         $ssn: String!
         $arn: String!
-        $emergency_contact: String!,
+        $emergency_contact: String!
       ) {
         createClient(input: {
           email: $email

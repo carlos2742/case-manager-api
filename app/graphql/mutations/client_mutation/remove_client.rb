@@ -5,13 +5,14 @@ module Mutations
       field :client, Types::ModelTypes::ClientType, null: false
 
       # TODO: define arguments
-      argument :id, ID, required: false
+      argument :id, ID, required: true
 
       # TODO: define resolve method
       def resolve(id:)
         authorize_user
 
-        client = Client.find_by_id(id)
+        client = Client.find(id)
+        client.destroy
 
         MutationResult.call(
             obj: { client: client },

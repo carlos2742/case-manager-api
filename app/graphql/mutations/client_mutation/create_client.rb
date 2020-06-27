@@ -17,7 +17,7 @@ module Mutations
 
       # TODO: define resolve method
       def resolve(args)
-        # authorize_user
+        authorize_user
 
         client = Client.create!(args)
 

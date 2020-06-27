@@ -11,7 +11,7 @@ module GqlSupport
       context: context
     )
 
-    query.result if query.valid?
+    query.result
   end
 
   private

@@ -5,6 +5,7 @@ module Mutations
       field :client, Types::ModelTypes::ClientType, null: false
 
       # TODO: define arguments
+      argument :id, ID, required: true
       argument :email, String, required: false
       argument :first_name, String, required: false
       argument :last_name, String, required: false
@@ -18,7 +19,8 @@ module Mutations
       # TODO: define resolve method
       def resolve(args)
         authorize_user
-        client = Client.find_by_id(id)
+
+        client = Client.find(args[:id])
         client.update(args)
 
         MutationResult.call(
