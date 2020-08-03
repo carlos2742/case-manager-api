@@ -10,7 +10,7 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user,
     }
     result = CaseManagerApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -44,5 +44,10 @@ class GraphqlController < ApplicationController
     logger.error e.backtrace.join("\n")
 
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
+  end
+
+  def current_user
+    token = request.headers["Authorization"].to_s
+    User.find_for_database_authentication(authentication_token: token)
   end
 end

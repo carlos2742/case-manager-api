@@ -27,10 +27,15 @@ gem 'rack-cors'
 
 gem "graphql"
 
+gem 'devise'
+gem 'devise-token_authenticatable'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "graphiql-rails"
   gem 'byebug', platform: :mri
+  gem "graphiql-rails"
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
