@@ -8,6 +8,7 @@ module Queries
       type Types::ModelTypes::ClientType, null: false
 
       def resolve(id:)
+        authorize_user
         ::Client.find(id)
       end
     end
