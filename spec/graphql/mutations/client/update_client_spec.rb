@@ -6,7 +6,7 @@ RSpec.describe Mutations::ClientMutation::UpdateClient do
   it "update client" do
     client = create_client
     variables = {
-        id: client[:id],
+        id: client.gql_id,
         last_name: 'Rodriguez'
     }
 

@@ -1,11 +1,12 @@
 module Queries
   module ClientQueries
     class Clients < Queries::BaseQuery
-      description 'Find an client by ID'
+      description 'Get all clients'
 
       type [Types::ModelTypes::ClientType], null: false
 
-      def resolve()
+      def resolve
+        authorize_user
         ::Client.all
       end
     end

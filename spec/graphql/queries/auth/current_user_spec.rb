@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Mutations::UserMutation::SignIn do
+RSpec.describe Queries::AuthQueries::CurrentUser do
   it "signs in the user" do
     variables = sign_in_params
 

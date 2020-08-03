@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Mutations::UserMutation::SignOut do
+RSpec.describe Mutations::AuthMutation::SignOut do
   it "signs out the current user" do
     user = User.create(valid_user_attributes)
     auth_token = user.authentication_token

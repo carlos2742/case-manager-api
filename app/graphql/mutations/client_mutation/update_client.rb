@@ -20,8 +20,8 @@ module Mutations
       def resolve(args)
         authorize_user
 
-        client = Client.find(args[:id])
-        client.update(args)
+        client = Client.find_by_gql_id(args[:id])
+        client.update(args.except(:id))
 
         MutationResult.call(
             obj: { client: client },

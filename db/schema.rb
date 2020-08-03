@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20200617204339) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string   "name"
-    t.integer  "role",                            default: 0
+    t.integer  "rol",                             default: 0
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.text     "authentication_token"

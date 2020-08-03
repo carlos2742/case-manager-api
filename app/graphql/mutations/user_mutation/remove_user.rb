@@ -1,8 +1,8 @@
 module Mutations
-  module ClientMutation
-    class RemoveClient < BaseMutation
+  module UserMutation
+    class RemoveUser < BaseMutation
       # TODO: define return fields
-      field :client, Types::ModelTypes::ClientType, null: false
+      field :user, Types::ModelTypes::UserType, null: false
 
       # TODO: define arguments
       argument :id, ID, required: true
@@ -11,11 +11,11 @@ module Mutations
       def resolve(id:)
         authorize_user
 
-        entity = Client.find_by_gql_id(id)
+        entity = User.find_by_gql_id(id)
         entity.destroy
 
         MutationResult.call(
-            obj: { client: entity },
+            obj: { user: entity },
             success: entity.persisted?,
             errors: entity.errors
         )

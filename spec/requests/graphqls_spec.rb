@@ -28,7 +28,7 @@ RSpec.describe "Graphqls", type: :request do
     stub_schema_execute
     user = sign_in_user
 
-    post graphql_path(format: :json)
+    post graphql_path(format: :json), :headers => {"Authorization" => user[:authentication_token]}
 
     expect(CaseManagerApiSchema).to have_received(:execute).with(
         nil,

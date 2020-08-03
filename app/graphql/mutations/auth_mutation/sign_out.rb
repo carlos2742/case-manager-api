@@ -1,5 +1,5 @@
 module Mutations
-  module UserMutation
+  module AuthMutation
     class SignOut < BaseMutation
       graphql_name "SignOut"
 

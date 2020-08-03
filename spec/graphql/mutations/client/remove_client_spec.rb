@@ -8,7 +8,7 @@ RSpec.describe Mutations::ClientMutation::RemoveClient do
     # signIn User
     context = signIn_user
 
-    variables = {id: client.id}
+    variables = {id: client.gql_id}
 
     result = gql_query(query: mutation, variables: variables, context: context).
         to_h.deep_symbolize_keys.dig(:data, :removeClient)
@@ -37,7 +37,7 @@ RSpec.describe Mutations::ClientMutation::RemoveClient do
   it "raise error for user not signed" do
     client = create_client
 
-    variables = {id: client.id}
+    variables = {id: client.gql_id}
 
     result = gql_query(query: mutation, variables: variables).
         to_h.deep_symbolize_keys

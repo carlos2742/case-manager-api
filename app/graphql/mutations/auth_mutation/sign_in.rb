@@ -1,5 +1,5 @@
 module Mutations
-  module UserMutation
+  module AuthMutation
     class SignIn < BaseMutation
       graphql_name "SignIn"
 
@@ -20,10 +20,10 @@ module Mutations
             context[:current_user] = user
             MutationResult.call(obj: { user: user }, success: true)
           else
-            GraphQL::ExecutionError.new("Incorrect Email/Password")
+            GraphQL::ExecutionError.new("WRONG_CREDENTIALS")
           end
         else
-          GraphQL::ExecutionError.new("User not registered on this application")
+          GraphQL::ExecutionError.new("UNREGISTERED_USER")
         end
       end
     end

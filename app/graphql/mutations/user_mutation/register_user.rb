@@ -10,9 +10,12 @@ module Mutations
       # TODO: define arguments
       argument :name, String, required: true
       argument :email, String, required: true
+      argument :rol, Integer, required: true
       argument :password, String, required: true
 
       def resolve(args)
+        authorize_user
+
         user = User.create!(args)
 
         # current_user needs to be set so authenticationToken can be returned
