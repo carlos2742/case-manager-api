@@ -11,6 +11,7 @@ module Mutations
       argument :name, String, required: true
       argument :email, String, required: true
       argument :rol, Integer, required: true
+      argument :title, Integer, required: true
       argument :password, String, required: true
 
       def resolve(args)

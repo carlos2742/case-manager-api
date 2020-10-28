@@ -13,10 +13,12 @@ module Types
       field :remember_created_at, GraphQL::Types::ISO8601DateTime, null: true
       field :name, String, null: true
       field :rol, Integer, null: true
+      field :title, Integer, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
       field :authentication_token, String, null: true
       field :authentication_token_created_at, GraphQL::Types::ISO8601DateTime, null: true
+      field :cases, [Types::ModelTypes::CaseType], null: true
 
       def authentication_token
         if object.gql_id != context[:current_user]&.gql_id
