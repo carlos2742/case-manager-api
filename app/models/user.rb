@@ -8,4 +8,7 @@ class User < ApplicationRecord
          :token_authenticatable
 
   enum roles: [ :developer, :admin, :collaborator]
+  enum titles: [ :attorney, :paralegal, :staff]
+
+  has_many :cases
 end

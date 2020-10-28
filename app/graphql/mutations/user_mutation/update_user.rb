@@ -10,6 +10,7 @@ module Mutations
       argument :name, String, required: false
       argument :password, String, required: false
       argument :rol, Integer, required: false
+      argument :title, Integer, required: false
 
       # TODO: define resolve method
       def resolve(args)
