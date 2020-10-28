@@ -10,5 +10,9 @@ module Types
     field :create_client, mutation: Mutations::ClientMutation::CreateClient
     field :update_client, mutation: Mutations::ClientMutation::UpdateClient
     field :remove_client, mutation: Mutations::ClientMutation::RemoveClient
+
+    field :create_case, mutation: Mutations::CaseMutation::CreateCase
+    field :update_case, mutation: Mutations::CaseMutation::UpdateCase
+    field :remove_case, mutation: Mutations::CaseMutation::RemoveCase
   end
 end

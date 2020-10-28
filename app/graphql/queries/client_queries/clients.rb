@@ -3,11 +3,15 @@ module Queries
     class Clients < Queries::BaseQuery
       description 'Get all clients'
 
-      type [Types::ModelTypes::ClientType], null: false
+      type [Types::ModelTypes::ClientType], null: true
 
-      def resolve
+      argument :name, String, required: false
+
+      def resolve(**args)
         authorize_user
-        ::Client.all
+        clients = ::Client.all
+        clients = clients.find_by_name(args[:name]) if args && args[:name]
+        clients
       end
     end
   end
